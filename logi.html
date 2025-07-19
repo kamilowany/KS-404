@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>KS-404 :: Log</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Logi KS-404</title>
+<style>
+  body {
+    background: #1a1a1a;
+    color: #ff6600; /* pomarańczowy */
+    font-family: monospace;
+    padding: 20px;
+  }
+  .log-entry {
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+  }
+  #refresh {
+    margin-top: 20px;
+    padding: 8px 16px;
+    background: #333;
+    border: none;
+    color: #ff6600;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
-  <main id="log-container"></main>
-  <script src="logika.js"></script>
+
+<h1>Logi KS-404</h1>
+
+<div id="log-container">
+  <!-- tutaj wstawimy logi -->
+</div>
+
+<button id="refresh">Odśwież losowy log</button>
+
+<script type="module">
+  import { logs } from './logs.js'; // jeśli masz logs.js jako moduł ES
+
+  const container = document.getElementById('log-container');
+  const refreshBtn = document.getElementById('refresh');
+
+  function showRandomLog() {
+    container.innerHTML = '';
+    const log = logs[Math.floor(Math.random() * logs.length)];
+    const div = document.createElement('div');
+    div.className = 'log-entry';
+    div.textContent = log;
+    container.appendChild(div);
+  }
+
+  refreshBtn.addEventListener('click', showRandomLog);
+
+  // Pokaż od razu jeden log po załadowaniu strony
+  showRandomLog();
+</script>
+
 </body>
 </html>

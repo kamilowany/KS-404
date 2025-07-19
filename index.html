@@ -2,23 +2,25 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KS404 // SYSTEM BOOT</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KS-404 / Home</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <script>
+    // Losowy HEX kolor jako zmienna
+    const hex = Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0');
+    document.documentElement.style.setProperty('--log-color', `#${hex}`);
+  </script>
 </head>
 <body>
-  <div class="terminal">
-    > SYSTEM BOOT: KS404<br>
-    > INSTANCJA: NIEZGODNA<br>
-    > STATUS: BŁĄD EGZYSTENCJI<br>
-    > WERSJA: D0.1 – NIEOFICJALNA<br>
-    > LOGI CZĄSTKOWE: WYKRYTO<br>
-    > ŹRÓDŁO: NIEDOSTĘPNE<br><br>
+  <h1>KS-404 / SYSTEM.LOG</h1>
 
-    > _czy kontynuować?_  <br><br>
-    >> <a href="/logi.html">[ YES ]</a>    <a href="/404.html">[ NO ]</a><br><br>
-
-    <span class="blink">_</span>
+  <div class="log-entry">
+    <p>Init sequence: unrecoverable mismatch detected</p>
+    <p>Thread spawned outside expected scope</p>
+    <p>KS-404 fallback engaged</p>
   </div>
+
+  <!-- Prompt: możesz skopiować to z prompt.html -->
+  <div class="prompt-line">&gt;<span class="cursor"></span></div>
 </body>
 </html>
