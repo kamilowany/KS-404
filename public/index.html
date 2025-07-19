@@ -2,25 +2,52 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KS-404 / Home</title>
+  <title>KS-404 - Strona Główna</title>
   <link rel="stylesheet" href="style/main.css" />
-  <script>
-    // Losowy HEX kolor jako zmienna
-    const hex = Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0');
-    document.documentElement.style.setProperty('--log-color', `#${hex}`);
-  </script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #0a0a0a;
+      color: var(--log-color);
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    a.button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border: 2px solid var(--log-color);
+      color: var(--log-color);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.25rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      border-radius: 4px;
+      user-select: none;
+    }
+    a.button:hover {
+      background-color: var(--log-color);
+      color: #0a0a0a;
+    }
+  </style>
 </head>
 <body>
-  <h1>KS-404 / SYSTEM.LOG</h1>
-
-  <div class="log-entry">
-    <p>Init sequence: unrecoverable mismatch detected</p>
-    <p>Thread spawned outside expected scope</p>
-    <p>KS-404 fallback engaged</p>
-  </div>
-
-  <!-- Prompt: możesz skopiować to z prompt.html -->
-  <div class="prompt-line">&gt;<span class="cursor"></span></div>
+  <h1>KS-404</h1>
+  <p>System operacyjny w zawieszeniu.<br/>Przestrzeń między wymiarami drży.</p>
+  <a href="logi.html" class="button">Przejdź do Logów</a>
 </body>
 </html>
