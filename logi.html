@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Logi KS-404</title>
-  <link rel="stylesheet" href="/style/main.css" />
+  <link rel="stylesheet" href="style/main.css" />
   <style>
     .log-entry {
       cursor: pointer;
@@ -29,7 +29,7 @@
   <div id="logDetails" class="log-content"></div>
 
   <script>
-    fetch('./logs/logs.json')
+    fetch('logs/logs.json')
       .then(response => {
         if (!response.ok) {
           throw new Error(`Błąd HTTP: ${response.status}`);
