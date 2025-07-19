@@ -1,26 +1,13 @@
 body {
-  background-color: #ffffff; /* biały ekran */
-  color: #00aa00; /* klasyczna zieleń terminalowa */
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 16px;
-  line-height: 1.6;
-  padding: 40px;
-  margin: 0;
+  background: #fff;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  padding: 2rem;
 }
 
-a {
-  color: #008800;
-  text-decoration: none;
-  border-bottom: 1px dotted #008800;
-}
-
-a:hover {
-  color: #005500;
-  border-bottom: 1px solid #005500;
-}
-
-.terminal {
-  max-width: 800px;
-  margin: 0 auto;
-  white-space: pre-wrap;
+.log-entry {
+  border: 1px dashed #00ff00;
+  padding: 1rem;
+  margin-top: 2rem;
+  background: #f9f9f9;
 }
