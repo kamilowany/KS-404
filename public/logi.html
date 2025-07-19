@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logi KS-404</title>
+  <link rel="stylesheet" href="style/main.css" />
+  <style>
+    .log-entry {
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+    }
+
+    .log-entry:hover {
+      text-decoration: underline;
+    }
+
+    .log-content {
+      margin-top: 2rem;
+      padding: 1rem;
+      border-left: 2px solid var(--log-color);
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Logi KS-404</h1>
+  <ul id="logsList"></ul>
+
+  <div id="logDetails" class="log-content"></div>
+
+  <script>
+    fetch('./logs/logs.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Błąd HTTP: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(logs => {
+        const listEl = document.getElementById('logsList');
+        const detailsEl = document.getElementById('logDetails');
+
+        logs.forEach((log, index) => {
+          const li = document.createElement('li');
+          li.textContent = `[${index + 1}] ${log.slice(0, 60)}...`;
+          li.classList.add('log-entry');
+
+          li.addEventListener('click', () => {
+            detailsEl.textContent = log;
+          });
+
+          listEl.appendChild(li);
+        });
+      })
+      .catch(error => {
+        console.error('Błąd podczas ładowania logów:', error);
+      });
+  </script>
+</body>
+</html>
