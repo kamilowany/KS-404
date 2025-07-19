@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>KS-404 - Strona Główna</title>
+  <link rel="stylesheet" href="/public/style/main.css" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #0a0a0a;
+      color: var(--log-color);
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    a.button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border: 2px solid var(--log-color);
+      color: var(--log-color);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.25rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      border-radius: 4px;
+      user-select: none;
+    }
+    a.button:hover {
+      background-color: var(--log-color);
+      color: #0a0a0a;
+    }
+  </style>
+</head>
+<body>
+  <h1>KS-404</h1>
+  <p>System operacyjny w zawieszeniu.<br/>Przestrzeń między wymiarami drży.</p>
+  <a href="/public/logi.html" class="button">Przejdź do Logów</a>
+</body>
+</html>
