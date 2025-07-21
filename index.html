@@ -99,7 +99,7 @@
 <div id="logContainer"></div>
 
 <div id="inputSection" style="display:none;">
-  <label for="userInput">Wpisz <strong>DALEJ</strong> i naciśnij Enter:</label><br/>
+  <label for="userInput">Write <strong>next</strong> and click Enter</label><br/>
   <input type="text" id="userInput" autocomplete="off" />
   <span class="cursor"></span>
 </div>
@@ -327,7 +327,7 @@ The final summary of KS-404 as “both error and truth, end and beginning, a fla
 
   userInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
-      if (userInput.value.trim().toUpperCase() === 'DALEJ') {
+      if (userInput.value.trim().toUpperCase() === 'next') {
         clearInterval(countdownInterval);
         countdownEl.textContent = '';
         hideInput();
