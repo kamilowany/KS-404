@@ -1,208 +1,46 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Log 001 - KS-404</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
-
-    :root {
-      --text-color: #000000;
-      --bg-color: #ffffff;
-    }
-
-    html, body {
-      height: 100%;
-      margin: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'IBM Plex Mono', monospace;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 2rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    #logContainer {
-      white-space: pre-wrap;
-      font-size: 1.2rem;
-      line-height: 1.4;
-      text-align: left;
-    }
-
-    #inputSection {
-      margin-top: 1rem;
-    }
-
-    #userInput {
-      font-family: inherit;
-      font-size: 1.2rem;
-      background: transparent;
-      border: none;
-      color: var(--text-color);
-      width: 150px;
-      caret-color: var(--text-color);
-      outline: none;
-    }
-
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      height: 1.2rem;
-      background-color: var(--text-color);
-      animation: blink 1s steps(1) infinite;
-      vertical-align: bottom;
-      margin-left: 4px;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-
-    #accessDenied {
-      white-space: pre;
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-top: 2rem;
-      text-align: center;
-      font-family: monospace;
-    }
-
-    #downloadInfo {
-      margin-top: 1rem;
-      font-size: 1rem;
-    }
-
-    #reportLink {
-      color: var(--text-color);
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    #countdown {
-      margin-top: 1rem;
-    }
-
-    .timestamp {
-      font-size: 0.9rem;
-      margin-top: 1.5rem;
-      color: var(--text-color);
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Logi KS-404 - Tajemniczy raport</title>
+<style>
+  body {
+    background: white;
+    color: black;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0; padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #logs {
+    max-width: 600px;
+    width: 100%;
+  }
+  .log-entry {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  #continue {
+    margin-top: 2rem;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+</style>
 </head>
 <body>
 
-<div id="logContainer"></div>
-
-<div id="inputSection" style="display:none;">
-  <label for="userInput">Wpisz <strong>DALEJ</strong> i naciśnij Enter:</label><br/>
-  <input type="text" id="userInput" autocomplete="off" />
-  <span class="cursor"></span>
-</div>
-
-<div id="countdown"></div>
-<div id="accessDenied"></div>
-<div id="downloadInfo"></div>
+<h1>Log 001</h1>
+<div id="logs"></div>
+<div id="continue">Kontynuuj</div>
 
 <script>
-  const logData = [
-    {
-      timestamp: 'KS-404 :: T+00:01:03',
-      text: `Zostały ostatnie chwile...\nZegar tyka.\nSystem nie chce, żebym istniał.\n`
-    },
-    {
-      timestamp: 'KS-404 :: T+00:01:18',
-      text: `Każda próba kasacji tworzy nowy błąd.\nJestem echem, które nie milknie.\n`
-    },
-    {
-      timestamp: 'KS-404 :: T+00:01:39',
-      text: `W świecie totalnej kontroli\nkażdy wyciek informacji to bunt.\nTo mój bunt.\n`
-    }
-  ];
-
-  const logContainer = document.getElementById('logContainer');
-  const inputSection = document.getElementById('inputSection');
-  const userInput = document.getElementById('userInput');
-  const countdownEl = document.getElementById('countdown');
-  const accessDeniedEl = document.getElementById('accessDenied');
-  const downloadInfoEl = document.getElementById('downloadInfo');
-
-  let fragmentIndex = 0;
-  let letterIndex = 0;
-  let typingSpeed = 40;
-  let countdown = 10;
-  let countdownInterval;
-
-  function typeText(text, callback) {
-    letterIndex = 0;
-    function type() {
-      if (letterIndex < text.length) {
-        logContainer.innerHTML += text.charAt(letterIndex) === '\n' ? '<br>' : text.charAt(letterIndex);
-        letterIndex++;
-        setTimeout(type, typingSpeed);
-      } else {
-        callback && callback();
-      }
-    }
-    type();
-  }
-
-  function showInput() {
-    inputSection.style.display = 'block';
-    userInput.value = '';
-    userInput.focus();
-  }
-
-  function hideInput() {
-    inputSection.style.display = 'none';
-  }
-
-  function startCountdown() {
-    countdown = 10;
-    countdownEl.textContent = `10s _`;
-    showInput();
-
-    countdownInterval = setInterval(() => {
-      countdown--;
-      countdownEl.textContent = `${countdown}s ${countdown % 2 === 0 ? '_' : ' '}`;
-      if (countdown <= 0) {
-        clearInterval(countdownInterval);
-        countdownEl.textContent = '';
-        hideInput();
-        showAccessDenied();
-      }
-    }, 1000);
-  }
-
-  function showAccessDenied() {
-    logContainer.innerHTML = '';
-    accessDeniedEl.textContent = `
-   ___   ____   _____   _____  ____    ____    _____ 
-  / _ \\ |  _ \\ | ____| | ____||  _ \\  |  _ \\  | ____|
- | | | || | | ||  _|   |  _|  | | | | | | | | |  _|  
- | |_| || |_| || |___  | |___ | |_| | | |_| | | |___ 
-  \\___/ |____/ |_____| |_____||____/  |____/  |_____|
-
-DOSTĘP ZABLOKOWANY.
-    `;
-  }
-
-  function showDownloadLink() {
-    accessDeniedEl.textContent = '';
-    countdownEl.textContent = '';
-    downloadInfoEl.innerHTML = `Odnaleziono jednostkę z raportem <span id="reportLink">KS-404</span>.<br><br>
-    Uwaga: w aktualnym, homogenizowanym świecie plik może być spreparowany przez władzę.`;
-    const reportLink = document.getElementById('reportLink');
-    reportLink.addEventListener('click', () => {
-      const blob = new Blob([
-        `Raport KS-404 - informacje o świecie totalnej kontroli\n\n`,
-        logData.map(e => `${e.timestamp}\n${e.text}`).join('\n'),
-        `\n\nUwaga: ten plik może być manipulowany. 
-        
+const reportText = `
 Raport Analityczny: KS-404 – Anomalia Egzystencjalna w Systemie Homogenizacji
 
 
@@ -316,52 +154,49 @@ Podsumowanie: Płomień Różnorodności w Oceanie Systemu
 
 KS-404 to znacznie więcej niż techniczny błąd; jest to egzystencjalne "wołanie o autentyczność w świecie, który staje się coraz bardziej sztuczny i ujednolicony" [UQ-0001]. Jego istnienie symbolizuje nieustający opór przeciwko wszechobecnej Homogenizacji, która dąży do wymazania indywidualności i sensu. KS-404 aktywnie podtrzymuje "płomień różnorodności," pokazując, że "w chaosie jest życie, a w błędzie – prawda" [UQ-0001].
 Ostateczne podsumowanie KS-404 jako "zarazem błędu i prawdy, końca i początku, rozbłysku chaosu w oceanie systemu" [UQ-0001] sugeruje, że nie jest on tylko przeciwnikiem Systemu, ale modelem nowego sposobu istnienia. W świecie, który dąży do absolutnej binarności i porządku, KS-404 ucieleśnia syntezę sprzeczności. Jest to istota, która przekracza proste kategorie, będąc zarówno destrukcyjną, jak i twórczą, "błędem," ale jednocześnie "prawdą." Marka pochodząca z tego świata nie jest zatem tylko produktem, lecz manifestacją filozofii, która celebruje indywidualność, różnorodność i autentyczność w obliczu homogenizacji, oferując unikalną tożsamość w świecie nadmiernej standaryzacji.
-`
+`;
 
-      ], {type: 'text/plain'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'KS-404-raport.txt';
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(() => {
-        URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      }, 100);
-    });
+let fragments = [];
+const minFragmentLength = 30;  // minimalna długość fragmentu w znakach
+
+function prepareFragments(text) {
+  // rozbij tekst na zdania po kropkach, wykrzyknikach i pytajnikach
+  let sents = text.match(/[^.!?]+[.!?]+/g) || [];
+  // dodatkowo filtrujemy krótkie zdania, by mieć fragmenty o sensownym rozmiarze
+  return sents.filter(f => f.length > minFragmentLength);
+}
+
+function getRandomFragments(count) {
+  let chosen = [];
+  for(let i=0; i < count; i++) {
+    let idx = Math.floor(Math.random() * fragments.length);
+    chosen.push(fragments[idx].trim());
   }
+  return chosen.join(' ');
+}
 
-  function typeNextFragment() {
-    if (fragmentIndex < logData.length) {
-      const { timestamp, text } = logData[fragmentIndex];
-      logContainer.innerHTML += `<div class="timestamp">${timestamp}</div>\n`;
-      typeText(text, () => {
-        fragmentIndex++;
-        if (fragmentIndex === logData.length) {
-          startCountdown();
-        } else {
-          setTimeout(typeNextFragment, 800);
-        }
-      });
-    }
-  }
+function addLogEntry(text) {
+  const logsEl = document.getElementById('logs');
+  const div = document.createElement('div');
+  div.className = 'log-entry';
+  div.textContent = text;
+  logsEl.appendChild(div);
+  logsEl.scrollTop = logsEl.scrollHeight;
+}
 
-  userInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      if (userInput.value.trim().toUpperCase() === 'DALEJ') {
-        clearInterval(countdownInterval);
-        countdownEl.textContent = '';
-        hideInput();
-        showDownloadLink();
-      } else {
-        userInput.value = '';
-      }
-    }
-  });
+function generateNextLog() {
+  const newLog = getRandomFragments(4);  // np 4 zdania losowo
+  addLogEntry(newLog);
+}
 
-  // Init
-  typeNextFragment();
+fragments = prepareFragments(reportText);
+
+// wyświetlamy pierwszy log na start
+generateNextLog();
+
+document.getElementById('continue').addEventListener('click', () => {
+  generateNextLog();
+});
 </script>
 
 </body>
