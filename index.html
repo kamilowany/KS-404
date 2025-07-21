@@ -183,9 +183,9 @@
     logContainer.innerHTML = '';
     accessDeniedEl.textContent = `
 
-░█▀█░█▀▀░█▀▀░█▀▀░█▀▀░░░█▀▄░█▀▀░█▀█░▀█▀░█▀▀░█▀▄
-░█▀█░█░░░█░░░█▀▀░▀▀█░░░█░█░█▀▀░█░█░░█░░█▀▀░█░█
-░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀░
+░█▀█░█▀▀░█▀▀░█▀▀░█▀▀ss░░░█▀▄░█▀▀░█▀█░▀█▀░█▀▀░█▀▄
+░█▀█░█░░░█░░░█▀▀░▀▀█ss░░░█░█░█▀▀░█░█░░█░░█▀▀░█░█
+░▀░▀░▀▀▀░▀▀▀░▀▀▀░▀▀▀ss░░░▀▀░░▀▀▀░▀░▀░▀▀▀░▀▀▀░▀▀░
 
 ACCES DENIED.
     `;
@@ -328,7 +328,7 @@ The final summary of KS-404 as “both error and truth, end and beginning, a fla
 
   userInput.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
-      if (userInput.value.trim().toUpperCase() === 'next') {
+      if (userInput.value.trim().toUpperCase() === 'Next') {
         clearInterval(countdownInterval);
         countdownEl.textContent = '';
         hideInput();
